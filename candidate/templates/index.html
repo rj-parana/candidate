@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box
+    }
+
+    /* Full-width input fields */
+    input[type=text],
+    input[type=date],
+    input[type=file],
+    input[type=email],
+    input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    input[type=text]:focus,
+    input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    /* Set a style for all buttons */
+    button {
+        background-color: #04AA6D;
+        color: white;
+        padding: 14px 20px;
+        /* margin: 8px 0; */
+        border: none;
+        cursor: pointer;
+        width: 10%;
+        opacity: 0.9;
+    }
+
+    button:hover {
+        opacity: 1;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+        padding: 14px 20px;
+        width: 10%;
+        background-color: #f44336;
+    }
+
+    /* Float cancel and signup buttons and add an equal width */
+    .cancelbtn,
+    .signupbtn {
+        float: left;
+        width: 10%;
+    }
+
+    /* Add padding to container elements */
+    .container {
+        padding: 16px;
+    }
+
+    /* Clear floats */
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    /* Change styles for cancel button and signup button on extra small screens */
+    @media screen and (max-width: 300px) {
+
+        .cancelbtn,
+        .signupbtn {
+            width: 100%;
+        }
+    }
+</style>
+
+
+<body>
+
+    <form style="border:1px solid #ccc" method="POST">
+        <div class="container">
+            <h1>Personal Details</h1>
+            <p>Please fill above fields.</p>
+            <hr>
+            {% csrf_token %}
+
+            <label for="honorific"><b>Honorific</b></label>
+            <!-- <select class="honorific" id="listhead">
+                <option value="select">- Select Honorific -</option>
+                {% for entry in items %}
+                <option value="{{ entry.id }}">{{ entry.name }}</option>
+                {% endfor %}
+            </select> -->
+            <input type="text" placeholder="Enter Honorific" name="honorific" value="{{ honorific }}" required>
+
+            <label for="f_name"><b>First Name</b></label>
+            <input type="text" placeholder="Enter First Name" name="f_name" value="{{ f_name }}" required>
+
+            <label for="l_name"><b>Last Name</b></label>
+            <input type="text" placeholder="Enter Last Name" name="l_name" value="{{ l_name }}">
+
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Enter Email" name="email" value="{{ email }}" required>
+
+            <label for="gender"><b>Gender</b></label>
+            <input type="text" placeholder="Enter Gender" name="gender" value="{{ gender }}">
+
+            <label for="dob"><b>Date Of Birth</b></label>
+            <input type="date" placeholder="Enter Date Of Birth" name="dob" value="{{ dob }}">
+
+            <label for="country_code"><b>Country Code</b></label>
+            <input type="text" placeholder="Enter Country Code" name="country_code" value="{{ country_code }}">
+
+            <label for="mobile"><b>Mobile Number</b></label>
+            <input type="text" placeholder="Enter Mobile Number" name="mobile" value="{{ mobile }}">
+
+            <label for="country"><b>Country</b></label>
+            <input type="text" placeholder="Enter Country" name="country" value="{{ country }}">
+
+            <label for="state"><b>State</b></label>
+            <input type="text" placeholder="Enter State" name="state" value="{{ state }}">
+
+            <label for="city"><b>City</b></label>
+            <input type="text" placeholder="Enter City" name="city" value="{{ city }}">
+
+            <label for="address"><b>Address</b></label>
+            <input type="text" placeholder="Enter Address" name="address" value="{{ address }}">
+
+            <label for="pin_code"><b>Pin Code</b></label>
+            <input type="text" placeholder="Enter Pin Code" name="pin_code" value="{{ pin_code }}">
+
+            <label for="skills"><b>Skills</b></label>
+            <input type="text" placeholder="Enter Skills" name="skills" value="{{ skills }}">
+
+            <label for="hobbies"><b>Hobbies</b></label>
+            <input type="text" placeholder="Enter Hobbies" name="hobbies" value="{{ hobbies }}">
+
+            <label for="interests"><b>Interests</b></label>
+            <input type="text" placeholder="Enter Interests" name="interests" value="{{ interests }}">
+
+            <label for="image"><b>Image</b></label>
+            <input type="file" placeholder="Choose Image" name="image" value="{{ image }}">
+
+            <!-- <label>
+                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+            </label> -->
+
+        </div>
+
+        <div class="container after-add-more">
+            <h1>Education Details</h1>
+            <div class="col-md-2">
+                <div class="form-group change">
+                    <!-- <label for="">&nbsp;</label><br /> -->
+                    <h4 class="btn btn-success add-more">+ Add More</h4>
+                </div>
+            </div>
+            <input type="text" id="totallength" name="totallength" value="{{ totallength }}">
+            <div class="add-education">
+                {% for education in educations %}
+                    <hr>
+                    {% csrf_token %}
+                    <p>Please fill above fields.</p>
+                    <hr>
+                    <label for="level"><b>Level</b></label>
+                    <input type="text" placeholder="Enter Level" name="level" value="{{ education.level }}">
+                    <label for="school_name"><b>School Name</b></label>
+                    <input type="text" placeholder="Enter School Name" name="school_name" value="{{ education.school_name }}">
+                    <label for="course"><b>Course</b></label>
+                    <input type="text" placeholder="Enter Course" name="course" value="{{ education.course }}">
+                    <label for="year_of_passing"><b>Year Of Passing</b></label>
+                    <input type="text" placeholder="Enter Year Of Passing" name="year_of_passing" value="{{ education.year_of_passing }}">
+                    <label for="complited"><b>Complited</b></label>
+                    <input type="text" placeholder="Enter Complited" name="complited" value="{{ education.complited }}">
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="clearfix">
+            <button type="submit" class="signupbtn">Submit</button>
+        </div>
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var i = 0;
+            $(".add-more").click(function(){
+                var EducationHTML = "";
+                EducationHTML = '<hr>' 
+                                +'{% csrf_token %}'
+                                +'<p>Please fill above fields.</p>'
+                                +'<hr>'
+                                +'<label for="level"><b>Level</b></label>'
+                                +'<input type="text" placeholder="Enter Level" name="level'+i+'">'
+                                +'<label for="school_name"><b>School Name</b></label>'
+                                +'<input type="text" placeholder="Enter School Name" name="school_name'+i+'">'
+                                +'<label for="course"><b>Course</b></label>'
+                                +'<input type="text" placeholder="Enter Course" name="course'+i+'">'
+                                +'<label for="year_of_passing"><b>Year Of Passing</b></label>'
+                                +'<input type="text" placeholder="Enter Year Of Passing" name="year_of_passing'+i+'">'
+                                +'<label for="complited"><b>Complited</b></label>'
+                                +'<input type="text" placeholder="Enter Complited" name="complited'+i+'">'
+                                // +"<label for=''>&nbsp;</label><br/><button class='cancelbtn btn btn-danger remove'>- Remove</button><br>"
+                $('.add-education').append(EducationHTML);
+                i++;
+                    $("#totallength").val(i);
+
+                // $(EducationHTML).find(".change").EducationHTML("<label for=''>&nbsp;</label><br/><button class='cancelbtn btn btn-danger remove'>- Remove</button><br>");
+                // $(".after-add-more").last().after(EducationHTML);
+            });
+            
+        });
+
+        // $("body").on("click", ".remove", function () {
+        //     $(this).parents(".add-education").remove();
+        // });
+
+        // $(document).ready(function () {
+        //     $("body").on("click", ".add-more", function () {
+        //         var html = $(".after-add-more").first().clone();
+
+        //         //  $(html).find(".change").prepend("<label for=''>&nbsp;</label><br/><a class='btn btn-danger remove'>- Remove</a>");
+        //         $(html).find(".change").html("<label for=''>&nbsp;</label><br/><button class='cancelbtn btn btn-danger remove'>- Remove</button><br>");
+
+        //         $(".after-add-more").last().after(html);
+        //     });
+
+        //     $("body").on("click", ".remove", function () {
+        //         $(this).parents(".after-add-more").remove();
+        //     });
+        // });
+    </script>
+</body>
+
+</html>
